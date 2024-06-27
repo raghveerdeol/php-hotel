@@ -1,6 +1,6 @@
 <?php 
 require_once __DIR__ . "/infos/hotels.php";
-var_dump($hotels);
+$opzioneParcheggio = $_GET['parcheggio'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,64 +12,43 @@ var_dump($hotels);
 </head>
 <body>
     <main>
+        <div class="container-md mb-4">
+            <form action="index.php" method="get">
+                <div>
+                    <input type="radio" name="parcheggio" id="parcheggio" value="true">
+                    <label for="parcheggio">Con parcheggio</label>
+                </div>
+                <div>
+                    <input type="radio" name="parcheggio" id="no-parcheggio" value="">
+                    <label for="parcheggio">Senza parcheggio</label>
+                </div>
+                <div>
+                    <input type="submit" name="submit" value="submit">
+                </div>
+            </form>
+        </div>
     <div class="container-md">
         <table class="table">
-            <thead  class="table-primary">
-                <tr>
-                    <th scope="col">#</th>
+                <tbody>
                     <?php foreach ($hotels as $hotel) {?>
-                        <th><?php echo $hotel["name"] ?></th>
+                        <?php if ($hotel['parking'] == $opzioneParcheggio || !(isset($opzioneParcheggio)) ) {?>
+                        <tr>
+                            <th class="table-primary"><?php echo $hotel["name"] ?></th>
+                            <td class="table-secondary"><?php echo $hotel["description"] ?></td>
+                                <td class="table-secondary"><?php if ($hotel["parking"] === true) {
+                                    echo "there is a parking";
+                                } else {
+                                    echo "no parking";
+                                }?></td>
+                            <td class="table-secondary"><?php echo $hotel["vote"] ?> stars</td>
+                            <td class="table-secondary"><?php echo $hotel["distance_to_center"] ?> kilometers</td>
+                        </tr>
+                        <?php } ?>
                     <?php } ?>
-                </tr>
-            </thead>
-            <tbody>
-                <tr  class="table-secondary">
-                    <th scope="row">1</th>
-                    <?php foreach ($hotels as $hotel) {?>
-                        <td><?php echo $hotel["description"] ?></td>
-                    <?php } ?>
-                </tr>
-                <tr class="table-light">
-                    <th scope="row">2</th>
-                    <?php foreach ($hotels as $hotel) {?>
-                        <td><?php if ($hotel["parking"] === true) {
-                            echo "there is a parking";
-                        } else {
-                            echo "no parking";
-                        }?></td>
-                    <?php } ?>
-                </tr>
-                <tr  class="table-secondary">
-                    <th scope="row">3</th>
-                    <?php foreach ($hotels as $hotel) {?>
-                        <td><?php echo $hotel["vote"] ?> stars</td>
-                    <?php } ?>
-                </tr>
-                <tr class="table-light">
-                    <th scope="row">4</th>
-                    <?php foreach ($hotels as $hotel) {?>
-                        <td><?php echo $hotel["distance_to_center"] ?> kilometers</td>
-                    <?php } ?>
-                </tr>
             </tbody>
         </table>
     </div>
 
     </main>
 </body>
-    </html>
-    <!-- <li>
-        <?php echo $hotel["name"]; ?>
-    </li>
-    <li>
-        <?php echo $hotel["description"]; ?>
-    </li>
-    <li>
-        <?php echo $hotel["parking"]; ?>
-    </li>
-    <li>
-        <?php echo $hotel["vote"]; ?>
-    </li>
-    <li>
-        <?php echo $hotel["distance_to_center"]; ?>
-    </li> -->
+</html>
