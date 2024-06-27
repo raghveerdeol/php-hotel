@@ -36,7 +36,7 @@ $stelleHotel = $_GET['stelle'];
         <table class="table">
                 <tbody>
                     <?php foreach ($hotels as $hotel) {?>
-                        <?php if (($hotel['parking'] == $opzioneParcheggio && $hotel['vote'] == $stelleHotel ) || !(isset($opzioneParcheggio)) ) {?>
+                        <?php if (($hotel['parking'] == $opzioneParcheggio && $hotel['vote'] >= $stelleHotel ) || !(isset($opzioneParcheggio)) ) {?>
                         <tr>
                             <th class="table-primary"><?php echo $hotel["name"] ?></th>
                             <td class="table-secondary"><?php echo $hotel["description"] ?></td>
