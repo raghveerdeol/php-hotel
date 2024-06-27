@@ -1,6 +1,7 @@
 <?php 
 require_once __DIR__ . "/infos/hotels.php";
 $opzioneParcheggio = $_GET['parcheggio'];
+$stelleHotel = $_GET['stelle'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,13 +26,17 @@ $opzioneParcheggio = $_GET['parcheggio'];
                 <div>
                     <input type="submit" name="submit" value="submit">
                 </div>
+                <div>
+                    <label for="stelle">Stelle</label>
+                    <input type="number" name="stelle" id="stelle" min="0" max="5">
+                </div>
             </form>
         </div>
     <div class="container-md">
         <table class="table">
                 <tbody>
                     <?php foreach ($hotels as $hotel) {?>
-                        <?php if ($hotel['parking'] == $opzioneParcheggio || !(isset($opzioneParcheggio)) ) {?>
+                        <?php if (($hotel['parking'] == $opzioneParcheggio && $hotel['vote'] == $stelleHotel ) || !(isset($opzioneParcheggio)) ) {?>
                         <tr>
                             <th class="table-primary"><?php echo $hotel["name"] ?></th>
                             <td class="table-secondary"><?php echo $hotel["description"] ?></td>
