@@ -24,11 +24,11 @@ $stelleHotel = $_GET['stelle'];
                     <label for="parcheggio">Senza parcheggio</label>
                 </div>
                 <div>
-                    <input type="submit" name="submit" value="submit">
-                </div>
-                <div>
                     <label for="stelle">Stelle</label>
                     <input type="number" name="stelle" id="stelle" min="0" max="5">
+                </div>
+                <div>
+                    <input type="submit" name="submit" value="submit">
                 </div>
             </form>
         </div>
